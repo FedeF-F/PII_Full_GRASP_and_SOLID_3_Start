@@ -25,10 +25,18 @@ namespace Full_GRASP_And_SOLID
             recipe.FinalProduct = GetProduct("Café con leche");
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
+            ConsolePrinter consoleprinter = new ConsolePrinter();
+            FilePrinter fileprinter = new FilePrinter();
+            fileprinter.PrintRecipe(recipe);
+            consoleprinter.PrintRecipe(recipe);
 
-            AllInOnePrinter printer = new AllInOnePrinter();
-            printer.PrintRecipe(recipe, Destination.Console);
-            printer.PrintRecipe(recipe, Destination.File);
+            /// <summary>
+            /// Aplico polimorfismo dado que, el comportamiento de AllInOne printer cambia
+            ///  dependiendo del destino, remplazo eso por una operación polimorfica ubicada en IPrinter.
+            /// 
+            /// Tambien aplico srp dado que allinone printer tenia 2 responsabilidades,
+            /// las divido en dos clases distintas con 1 responsabilidad cada una
+            /// </summary>
         }
 
         private static void PopulateCatalogs()
